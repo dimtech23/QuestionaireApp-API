@@ -15,6 +15,8 @@ import UserRouter from './routes/user.js'
 import userAuth from './middleware/auth.js';
 import questionaireRoute from './routes/questionaire.js'
 import dotenv from 'dotenv';
+import { mainError } from './middleware/error/erroHandler.js';
+import NotFoundError from './middleware/error/notfound.js';
 
 dotenv.config();
 const app = express();
@@ -51,6 +53,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
 });
+
+app.use(mainError);
+app.use(NotFoundError);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
