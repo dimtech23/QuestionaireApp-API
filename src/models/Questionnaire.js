@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
-const Questionnaire = new mongoose.Schema({
+const QuestionnaireSchema = new mongoose.Schema({
   insuranceData: {
     type: mongoose.Schema.Types.Mixed,
-    required: true,
-   
+    required: [true, 'Insurance data is required'],
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  }
-
+  },
+}, {
+  timestamps: true,
 });
 
-export default mongoose.model("Questionnaire", Questionnaire);
+export default mongoose.model("Questionnaire", QuestionnaireSchema);
